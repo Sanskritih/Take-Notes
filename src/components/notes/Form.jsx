@@ -3,6 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import { Box, TextField, ClickAwayListener } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { v4 as uuid } from 'uuid';
+import {Button} from '@mui/material'
 
 import { DataContext } from '../../context/DataProvider';
 
@@ -16,6 +17,7 @@ const Container = styled(Box)`
     border-radius: 8px;
     min-height: 30px;
     padding: 10px 15px;
+    background-color: white;
 `
 
 const note = {
@@ -53,6 +55,7 @@ const Form = () => {
         setAddNote(changedNote);
     }
 
+
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <Container ref={containerRef}>
@@ -65,6 +68,17 @@ const Form = () => {
                         onChange={(e) => onTextChange(e)}
                         name='heading'
                         value={addNote.heading}
+                    />   
+                }
+                {   showTextField && 
+                    <TextField 
+                        placeholder="Tagline"
+                        variant="standard"
+                        InputProps={{ disableUnderline: true }}
+                        style={{ marginBottom: 10 }}
+                        onChange={(e) => onTextChange(e)}
+                        name='tagline'
+                        value={addNote.tagline}
                     />
                 }
                 <TextField
@@ -78,6 +92,12 @@ const Form = () => {
                     name='text'
                     value={addNote.text}
                 />
+                {   showTextField && 
+                    <div onClick={handleClickAway}>
+                    <Button variant="outlined" size="small" color='success'>Save</Button>
+                    </div>
+                }
+                
             </Container>
         </ClickAwayListener>
     )

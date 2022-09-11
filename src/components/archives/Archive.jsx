@@ -2,45 +2,53 @@ import { useContext } from 'react';
 
 import { Card, CardContent, CardActions, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { UnarchiveOutlined as Unarchive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
+import { ClearOutlined , DeleteOutlineOutlined as Delete} from '@mui/icons-material';
 
 import { DataContext } from '../../context/DataProvider';
 
 const StyledCard = styled(Card)`
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    width: 240px;
+    width: 400px;
+    height: 200px;
     margin: 8px;
-    box-shadow: none;
+    margin-left:2rem;
+    border: #bcf79a solid 2px;
+    background-color: white;
+    box-shadow: black 5px;
 `
 
-const Archive = ({ archive }) => {
+const Archive = ({ archive, handlePopUp }) => {
 
-    const { archiveNotes, setNotes, setAcrchiveNotes, setDeleteNotes } = useContext(DataContext);
+    const { pinnedNotes, setNotes, setPinnedNotes, setDeleteNotes } = useContext(DataContext);
 
-    const unArchiveNote = (archive) => {
-        const updatedNotes = archiveNotes.filter(data => data.id !== archive.id);
-        setAcrchiveNotes(updatedNotes);
-        setNotes(prevArr => [archive, ...prevArr]);
+    const unPinNote = (pin) => {
+        const updatedNotes = pinnedNotes.filter(data => data.id !== pin.id);
+        setPinnedNotes(updatedNotes);
+        setNotes(prevArr => [pin, ...prevArr]);
     }
 
-    const deleteNote = (archive) => {
-        const updatedNotes = archiveNotes.filter(data => data.id !== archive.id);
-        setAcrchiveNotes(updatedNotes);
-        setDeleteNotes(prevArr => [archive, ...prevArr]);
+    const deleteNote = (pin) => {
+        const updatedNotes = pinnedNotes.filter(data => data.id !== pin.id);
+        setPinnedNotes(updatedNotes);
+        setDeleteNotes(prevArr => [pin, ...prevArr]);
+    }
+
+    const switchPopUp = ()=>{
+        handlePopUp(archive);
     }
 
     return (
-        <StyledCard>
-                <CardContent>
+        <StyledCard >
+                <CardContent onClick={switchPopUp}>
                     <Typography>{archive.heading}</Typography>
                     <Typography>{archive.text}</Typography>
                 </CardContent>
                 <CardActions>
-                    <Unarchive 
+                    <ClearOutlined
                         fontSize="small" 
                         style={{ marginLeft: 'auto' }} 
-                        onClick={() => unArchiveNote(archive)}
+                        onClick={() => unPinNote(archive)}
                     />
                     <Delete 
                         fontSize="small"

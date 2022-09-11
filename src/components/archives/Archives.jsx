@@ -14,7 +14,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const Archives = () => {
 
-    const { archiveNotes } = useContext(DataContext);
+    const { pinnedNotes } = useContext(DataContext);
 
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>
@@ -22,7 +22,7 @@ const Archives = () => {
                 <DrawerHeader />
                 <Grid container>
                     {
-                        archiveNotes.map(archive => (
+                        pinnedNotes.map(archive => (
                             <Grid item>
                                 <Archive archive={archive} />
                             </Grid>

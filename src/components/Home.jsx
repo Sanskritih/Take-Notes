@@ -7,7 +7,6 @@ import SwipeDrawer from './SwipeDrawer';
 import Notes from './notes/Notes';
 import Archives from './archives/Archives';
 import DeleteNotes from './delete/DeleteNotes';
-import Pages from './Pages';
 
 const Home = () => {
     return (
@@ -20,8 +19,7 @@ const Home = () => {
                     <Route path='/delete' element={<DeleteNotes />} />
                 </Routes>
             </Router> */}
-            {/* <Notes /> */}
-            <Pages />
+            <Notes />
         </Box>
     )
 }
